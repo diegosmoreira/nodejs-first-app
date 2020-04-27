@@ -1,1 +1,8 @@
-<h1>Hello World!</h1>
+{{> header}}
+<ul>
+    {{#h.movies}}
+    <li><a>{{name}}</a></li>
+    {{/h.movies}}
+</ul>
+<h4>{{h.defaultPageName}}</h4>
+{{> footer}}
