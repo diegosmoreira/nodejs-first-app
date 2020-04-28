@@ -1,2 +1,10 @@
-<h1>HEADER</h1>
+<h1>HEADER</h1><br><br>
+{{#flashes}}
+    {{#success}}
+        <div>{{.}}</div>
+    {{/success}}
+    {{#error}}
+        <div>{{.}}</div>
+    {{/error}}
+{{/flashes}}
 <hr>
