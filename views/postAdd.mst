@@ -15,7 +15,7 @@
     </label>
     <br>
     <label>
-        Tags:
+        Tags: <input type="text" name="tags">
     </label>
     <br>
     <label>
