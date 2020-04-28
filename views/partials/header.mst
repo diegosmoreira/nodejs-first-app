@@ -1,10 +1,32 @@
-<h1>HEADER</h1><br><br>
-{{#flashes}}
-    {{#success}}
-        <div>{{.}}</div>
-    {{/success}}
-    {{#error}}
-        <div>{{.}}</div>
-    {{/error}}
-{{/flashes}}
-<hr>
+<html>
+    <head>
+        <link rel="stylesheet" href="/assets/css/template.css">
+        {{#pageTitle}}
+            <title>{{pageTitle}}</title>
+        {{/pageTitle}}
+        {{^defaultPageTitle}}
+        <title>{{h.defaultPageTitle}}</title>
+        {{/defaultPageTitle}}
+        {{}}
+    </head>
+
+    <body>
+        <header>
+            <h1>HEADER</h1><br><br>
+            <ul>
+                {{#h.menu}}
+                <li><a href="{{slug}}">{{name}}</a></li>
+                {{/h.menu}}
+            </ul>
+        </header>
+
+        {{#flashes}}
+            {{#success}}
+                <div class="warning">{{.}}</div>
+            {{/success}}
+            {{#error}}
+                <div class="warning">{{.}}</div>
+            {{/error}}
+        {{/flashes}}
+    </body>
+</html>

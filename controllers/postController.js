@@ -56,3 +56,8 @@ exports.editAction = async (req, res) =>{
     req.flash('save', 'Post updated successfully!');
     res.redirect('/');
 };
+
+exports.view = async (req, res) => {
+    const post = await Post.findOne({slug: req.params.slug});
+    res.render('postView', {post});
+};

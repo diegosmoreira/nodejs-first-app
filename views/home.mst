@@ -1,16 +1,10 @@
 {{> header}}
-<ul>
-    {{#h.movies}}
-    <li><a>{{name}}</a></li>
-    {{/h.movies}}
-</ul>
-<h4>{{h.defaultPageName}}</h4>
 
 {{#posts}}
+<div class="post">
     <h3>Title: <a href="/post/{{slug}}">{{title}}</a></h3>
     <hr>
     <p>{{body}}</p>
     <a href="/post/{{slug}}/edit">[ Edit ]</a>
+</div>
 {{/posts}}
-
-{{> footer}}
