@@ -2,7 +2,11 @@ require('dotenv').config({path: 'variables.env'});
 
 const mongo = require('mongoose');
 
-mongo.connect(process.env.DATABASE, {useUnifiedTopology: true, useNewUrlParser: true});
+mongo.connect(process.env.DATABASE, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useFindAndModify: false
+});
 
 mongo.Promise = global.Promise;
 mongo.connection.on('error', (error) =>{

@@ -5,4 +5,12 @@
     {{/h.movies}}
 </ul>
 <h4>{{h.defaultPageName}}</h4>
+
+{{#posts}}
+    <h3>Title: <a href="/post/{{slug}}">{{title}}</a></h3>
+    <hr>
+    <p>{{body}}</p>
+    <a href="/post/{{slug}}/edit">[ Edit ]</a>
+{{/posts}}
+
 {{> footer}}
