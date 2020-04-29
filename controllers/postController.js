@@ -33,14 +33,12 @@ exports.edit = async (req, res) => {
 
 exports.editAction = async (req, res) =>{
 
-    req.body.tags = req.body.tags.split(',').map(t => t.trim());
     req.body.slug = slug(req.body.title, {lower: true});
+    req.body.tags = req.body.tags.split(',').map(t => t.trim());
 
     try {
         const post = await Post.findOneAndUpdate(
-            {
-                slug: req.params.slug
-            },
+            {slug: req.params.slug},
             req.body,
             {
                 new: true,

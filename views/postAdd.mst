@@ -2,8 +2,12 @@
 
 <h3>Add Post</h3>
 
-<form method="POST">
-
+<form method="POST" enctype="multipart/form-data">
+    <label>
+        Image:
+        <input type="file" name="photo">
+    </label>
+    <br>
     <label>
         Title:
         <input type="text" name="title">
@@ -15,7 +19,8 @@
     </label>
     <br>
     <label>
-        Tags: <input type="text" name="tags">
+        Tags:
+        <input type="text" name="tags">
     </label>
     <br>
     <label>
