@@ -5,10 +5,26 @@ exports.index = async (req, res) =>{
 
     let responseJson = {
         pageTitle: 'Home',
-        posts: []
+        posts: [],
+        tags: [],
+        tag: ''
     }
 
-    const posts = await Post.find();
+    responseJson.tag = req.query.t;
+    const postFilter = (typeof responseJson.tag != 'undefined') ? {tags: responseJson.tag}: {};
+
+    const postsPromise = Post.find(postFilter);
+    const tagsPromise = Post.getTagsList();
+
+    const [tags, posts] = await Promise.all([tagsPromise, postsPromise]);
+
+    for(let i in tags){
+        if(tags[i]._id == responseJson.tag){
+            tags[i].class = 'selected';
+        }
+    }
+
+    responseJson.tags = tags;
     responseJson.posts = posts;
 
     res.render('home', responseJson);
