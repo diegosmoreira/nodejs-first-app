@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const homeController = require('../controllers/homeController');
-const aboutController = require('../controllers/aboutController');
+const userController = require('../controllers/userController');
 const postController = require('../controllers/postController');
 const imageMiddleware = require('../middlewares/imageMiddleware');
 
 router.get('/', homeController.index);
-router.get('/about', aboutController.about);
+router.get('/users/login', userController.login);
+router.get('/users/register', userController.register);
+router.post('/users/register', userController.registerAction);
 router.get('/post/add', postController.add);
 router.post('/post/add', 
     imageMiddleware.upload,
