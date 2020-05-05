@@ -14,7 +14,7 @@
         <header>
             <h1>HEADER</h1><br><br>
             {{#user}}
-                <p id="hello">Hello, {{user.name}}! <br><a href="/users/logout">Logout</a></p>
+                <p id="hello">Hello, {{user.name}}!</p>
             {{/user}}
             <ul>
                 {{#h.menu}}
