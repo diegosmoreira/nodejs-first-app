@@ -12,6 +12,7 @@
     <img src="/media/{{photo}}">
     {{/photo}}
     <h3>Title: <a href="/post/{{slug}}">{{title}}</a></h3>
+    <code>Author: {{author.name}}</code>
     <hr>
     <p>{{body}}</p>
     {{#user}}<a href="/post/{{slug}}/edit">[ Edit ]</a>{{/user}}

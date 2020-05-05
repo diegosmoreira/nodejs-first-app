@@ -13,7 +13,7 @@ exports.index = async (req, res) =>{
     responseJson.tag = req.query.t;
     const postFilter = (typeof responseJson.tag != 'undefined') ? {tags: responseJson.tag}: {};
 
-    const postsPromise = Post.find(postFilter);
+    const postsPromise = Post.findPosts(postFilter);
     const tagsPromise = Post.getTagsList();
 
     const [tags, posts] = await Promise.all([tagsPromise, postsPromise]);
