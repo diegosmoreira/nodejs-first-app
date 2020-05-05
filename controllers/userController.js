@@ -1,5 +1,6 @@
 
 const User = require('../models/User');
+const crypto = require('crypto');
 
 exports.login = (req, res) => {
     res.render('login');
@@ -65,4 +66,71 @@ exports.profileAction = async (req, res) => {
 
     req.flash('success', 'Updated successfully');
     res.redirect('/users/profile');
+};
+
+exports.forget = (req, res) => {
+    res.render('forget');
+};
+
+exports.forgetAction = async (req, res) => {
+    const user = await User.findOne({email: req.body.email});
+
+    if(!user){
+        req.flash('error', 'We sent an e-mail for you!');
+        res.redirect('/users/forget');
+        return;
+    }
+
+    user.resetPasswordToken = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordExpires = Date.now() + 3600000; //1 hour
+    await user.save();
+
+    const resetLink = `http://${req.headers.host}/users/reset/${user.resetPasswordToken}`;
+
+    //TODO: Send email
+
+    req.flash('success', 'We sent an email for you with instructions');
+    res.redirect('/users/login');
+
+};
+
+exports.forgetToken = async (req, res) => {
+    const user = await User.findOne({
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: {$gt: Date.now()}
+    }).exec();
+
+    if(!user){
+        req.flash('error', 'Token expired');
+        res.redirect('/users/forget');
+        return;
+    }
+
+    res.render('forgetPassword');
+};
+
+exports.forgetTokenAction = async (req, res) => {
+    const user = await User.findOne({
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: {$gt: Date.now()}
+    }).exec();
+
+    if(!user){
+        req.flash('error', 'Token expired');
+        res.redirect('/users/forget');
+        return;
+    }
+
+    if(req.body.password != req.body['password-confirm']){
+        req.flash('error', 'Passwords unmatched!');
+        res.redirect('back');
+        return;
+    }
+
+    user.setPassword(req.body.password, async ()=>{
+        await user.save();
+
+        req.flash('success', 'Password updated successfully');
+        res.redirect('/');
+    });
 }

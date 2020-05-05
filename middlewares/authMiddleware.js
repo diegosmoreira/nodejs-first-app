@@ -10,7 +10,7 @@ exports.isLogged = (req, res, next) => {
 
 exports.changePassword = (req, res) => {
     if(req.body.password != req.body['password-confirm']){
-        req.flash('error', 'Passowords unmatched!');
+        req.flash('error', 'Passwords unmatched!');
         res.redirect('/users/profile');
         return;
     }

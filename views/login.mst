@@ -5,7 +5,17 @@
 <hr>
 
 <form method="POST">
-    Email:<input type="email" name="email"><br>
-    Password: <input type="password" name="password"><br>
-    <input type="submit" value="Login">
+    <label>
+        Email:<input type="email" name="email">
+    </label>
+    <br>
+    <label>
+        Password: <input type="password" name="password">
+    </label>
+    <br>
+    <label>
+        <input type="submit" value="Login">
+    </label>    
 </form>
+
+<a href="/users/forget">Forgot password?</a>

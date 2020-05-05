@@ -1,0 +1,15 @@
+{{> header}}
+
+<h1>Redefine Password</h1>
+
+<hr>
+
+<form method="POST">
+    <label>
+        Email:<input type="email" name="email">
+    </label>
+    <br>
+    <label>
+        <input type="submit" value="Redefine">
+    </label>    
+</form>
