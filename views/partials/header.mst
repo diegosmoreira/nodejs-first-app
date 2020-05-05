@@ -13,6 +13,9 @@
     <body>
         <header>
             <h1>HEADER</h1><br><br>
+            {{#user}}
+                <p id="hello">Hello, {{user.name}}! <br><a href="/users/logout">Logout</a></p>
+            {{/user}}
             <ul>
                 {{#h.menu}}
                 <li><a href="{{slug}}">{{name}}</a></li>
