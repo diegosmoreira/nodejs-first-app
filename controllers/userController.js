@@ -1,6 +1,6 @@
-
 const User = require('../models/User');
 const crypto = require('crypto');
+const mailHandler = require('../handlers/mailHandler');
 
 exports.login = (req, res) => {
     res.render('login');
@@ -86,8 +86,16 @@ exports.forgetAction = async (req, res) => {
     await user.save();
 
     const resetLink = `http://${req.headers.host}/users/reset/${user.resetPasswordToken}`;
+    const to = `${user.name} <${user.email}>`;
+    const html = `Access follow link to reset your password</br><a href="${resetLink}">Reset</a>`;
+    const text = `Access follow link to reset your password ${resetLink}`;
 
-    //TODO: Send email
+    mailHandler.send({
+        to,
+        subject: 'Reset password',
+        html,
+        text
+    });
 
     req.flash('success', 'We sent an email for you with instructions');
     res.redirect('/users/login');
